@@ -66,15 +66,35 @@
     </main>
 
     <script>
-        let index = localStorage.getItem("index")
-        index = index === null ? 0 : index
+        // let index = localStorage.getItem("index")
+        //  index = index === null ? 0 : index
+        let index = 0
         // (условие) "?" значение если true ":" значение если flase
-
+        
+        let taskArrayText = localStorage.getItem("taskArray")
+        let taskArray = []
+        
+        let element = ""
+        let j = 0
+        while(j < taskArrayText.length){
+            if (taskArrayText[j] === ","){
+                console.log(element)
+                taskArray.push(element)
+                element = ""
+            } else if (j === taskArrayText.length -1){
+                element += taskArrayText[j]
+                console.log(element)
+                taskArray.push(element)
+            }else{
+                element += taskArrayText[j]
+            }
+            j++
+        }
 
         function Add() {
             let inputBox = document.querySelector("nav input")
 
-            let prefab =
+           /* let prefab =
                 `<div id="task-list">
                   <div class="task">
                   <input type="checkbox">
@@ -83,20 +103,23 @@
               </div>`
 
             let taskList = document.querySelector("#task-list")
+            taskList.innerHTML += prefab*/
+            
+            taskArray.push(inputBox.value)
 
-            taskList.innerHTML += prefab
-
-            localStorage.setItem("task" + index, inputBox.value)
+           localStorage.setItem("taskArray", taskArray)
 
             index++
 
-            localStorage.setItem("index", index)
+            //localStorage.setItem("index", index)
 
             inputBox.value = ""
+            Load()
         }
 
-        function Load() {
-            let taskText = localStorage.getItem("task0")
+        /*function Load() {
+            //let taskText = localStorage.getItem("task0")
+            let tas
 
             let prefab =
                 ` <div class="task">
@@ -107,29 +130,34 @@
             let taskList = document.querySelector("#task-list")
             taskList.innerHTML += prefab
 
-            function Load() {
-                let i = 0
 
-                while (i < index) {
-                    let taskText = localStorage.getItem("task" + i)
+        }*/
 
-                    let prefab =
-                        `<div class="task">
+
+        function Load() {
+            let i = 0
+            
+            let taskList = document.querySelector("#task-list")
+            taskList.innerHTML = ""
+
+           // while (i < index) 
+            while (i < taskArray.length){
+                //let taskText = localStorage.getItem("task" + i)
+                let taskText = taskArray[i]
+
+                let prefab =
+                    `<div class="task">
                    <input type="checkbox">
                    <div class="task-text"> ${taskText} </div>
                   </div>
               </div>`
-                    let taskList = document.querySelector("#task-list")
-                    taskList.innerHTML += prefab
+                taskList.innerHTML += prefab
 
-                    i++;
-                }
-
+                i++;
             }
 
-
-
         }
+
 
         Load()
 
