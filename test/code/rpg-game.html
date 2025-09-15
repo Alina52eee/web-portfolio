@@ -4,47 +4,132 @@
     <meta charset="UTF-8">
     <title>Rpg game.</title>
     <style>
-        #player-hp-bar-bg{
+        #player-hp-bar-bg {
             height: 20px;
-            background: #c72222;
+            background: #ff0000;
             margin: 10px;
             border-radius: 5px;
             border-style: solid;
             border-width: 1px;
             overflow: hidden;
         }
-         #player-hp-bar{
+
+        #player-hp-bar {
             height: 20px;
             background: #00ff3b;
         }
+
+        #enemy-hp-bar-bg {
+            height: 20px;
+            background: #5d3636;
+            margin: 10px;
+            border-radius: 5px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+        }
+
+        #enemy-hp-bar {
+            height: 20px;
+            background: #22452a;
+        }
+        #enemy-img{
+            font-size: 120px;
+            text-align: center;
+        }
     </style>
 </head>
+
 <body>
-  <div id="player-hp-bar-bg">
-      <div id="player-hp-bar"></div>
-  </div>
+    <div id="enemy-hp-bar-bg">
+        <div id="enemy-hp-bar"></div>
+    </div>
+
+   <div id="enemy-img">🔞</div>
+   
+    <div id="player-hp-bar-bg">
+        <div id="player-hp-bar"></div>
+    </div>
+
+
+    <div id="current-word">...</div>
     <input type="text" id="text-input" oninput="CheckLetter()"> <button id="text-btn">Отправить</button>
-   <script>
-       let playerBarHP = document.querySelector("#player-hp-bar")
-       let HP = 50
-       let maxHP = 50
-       
-       let currentWord = "javascript"
-       let textInput = document.querySelector("#text-input")
-       
-       function CheckLetter(){
-           if(textInput.value === currentWord ){
-               console.log("Correct!")
-           }else if (textInput.length === currentWord.length){
-               HP -= 5
-           }
-           console.log(HP)
-           playerBarHP.style.width = `${(HP/maxHP)*100}%`
-       }
-       
-       playerBarHP.style.width = `${(HP/maxHP)*100}%`
-       
-       console.log(50/100)
+    <script>
+        /*
+         План:
+          1. Тренажор печати.-
+            - Проверка совпадения слова. -
+            - Проверка ошибок. -
+            - Набор слов. -
+          2. Атака игрока. -
+          3. Атака врага
+       */
+        let playerBarHP = document.querySelector("#player-hp-bar")
+        let HP = 50
+        let maxHP = 50
+
+        let enemyBarHP = document.querySelector("#enemy-hp-bar")
+        let enemyHP = 50
+        let enemymaxHP = 50
+
+        let enemyAttackRate = 4
+        let enemyTimeStart = Date.now()
+        let enemyTime = 0
+        
+        let enemyImgs = ["👩🏻‍🦰", "👩🏻", "👽"]
+         let enemyImgBox = document.querySelector("#enemy-img")
+         enemyImgBox.textContent =  enemyImgs[Math.round(Math.random() * (enemyImgs.length - 1))]
+        
+
+        let wordList = ["bed", "red", "boy", "moon", "sun", "you", "me"]
+        let currentWordIndex = Math.round(Math.random() * (wordList.length - 1))
+        let currentWord = wordList[currentWordIndex]
+        let textInput = document.querySelector("#text-input")
+        let currentWordBox = document.querySelector("#current-word")
+        currentWordBox.textContent = currentWord
+
+        function CheckLetter() {
+            enemyTime = (Date.now() - enemyTimeStart) / 1000
+            console.log("eTime:", enemyTime)
+            if (enemyTime > enemyAttackRate) {
+                HP -= 10
+                enemyTimeStart = Date.now()
+
+            }
+
+            let i = 0
+            while (i < textInput.value.length) {
+                if (currentWord[i] !== textInput.value[i]) {
+                    HP -= 1
+                }
+                i++
+            }
+            if (textInput.value === currentWord) {
+                enemyHP -= 15
+                if (enemyHP < 0) {
+                    enemyHP = enemymaxHP
+                    HP = maxHP
+                }
+                NewWord()
+                console.log("Correct!")
+            } else if (textInput.length === currentWord.length) {
+                HP -= 5
+            }
+            console.log(enemyHP)
+            playerBarHP.style.width = `${(HP/maxHP)*100}%`
+            enemyBarHP.style.width = `${(enemyHP/enemymaxHP)*100}%`
+        }
+
+        function NewWord() {
+            textInput.value = ""
+            currentWordIndex = Math.round(Math.random() * 2)
+            currentWord = wordList[currentWordIndex]
+            currentWordBox.textContent = currentWord
+        }
+
+        playerBarHP.style.width = `${(HP/maxHP)*100}%`
+        enemyBarHP.style.width = `${(enemyHP/enemymaxHP)*100}%`
+
+        console.log(50 / 100)
     </script>
-</body>
-</html>
+</body></html>
