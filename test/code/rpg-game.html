@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <title>Rpg game.</title>
     <style>
+        body{
+            background: #adadff;
+            text-align: center;
+            font-size: 30px;
+            padding: 10px; 
+            margin: 150px;
+            
+        }
+        button{
+            color: darkorchid;
+            background: #e2a2ff;
+        }
+        #text-input{
+            width: 200px;
+        }
         #player-hp-bar-bg {
             height: 20px;
             background: #ff0000;
@@ -12,6 +27,7 @@
             border-style: solid;
             border-width: 1px;
             overflow: hidden;
+            width: 100%;
         }
 
         #player-hp-bar {
@@ -33,27 +49,41 @@
             height: 20px;
             background: #22452a;
         }
-        #enemy-img{
+
+        #enemy-img {
             font-size: 120px;
             text-align: center;
+        }
+        #enemy-ui{
+            max-width: 300px;
+        }
+        #player-ui{
+            max-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     </style>
 </head>
 
 <body>
-    <div id="enemy-hp-bar-bg">
-        <div id="enemy-hp-bar"></div>
-    </div>
+    <div id="enemy-ui">
+        <div id="enemy-name">Пуп.</div>
+        <div id="enemy-hp-bar-bg">
+            <div id="enemy-hp-bar"></div>
+        </div>
 
-   <div id="enemy-img">🔞</div>
-   
+        <div id="enemy-img">🔞</div>
+    </div>
+    
+<div id="player-ui">
     <div id="player-hp-bar-bg">
         <div id="player-hp-bar"></div>
     </div>
-
-
+    
     <div id="current-word">...</div>
-    <input type="text" id="text-input" oninput="CheckLetter()"> <button id="text-btn">Отправить</button>
+    <input type="text" id="text-input" oninput="CheckLetter()"> <button id="text-btn">Продолжить</button>
+</div>    
     <script>
         /*
          План:
@@ -76,10 +106,15 @@
         let enemyTimeStart = Date.now()
         let enemyTime = 0
         
-        let enemyImgs = ["👩🏻‍🦰", "👩🏻", "👽"]
-         let enemyImgBox = document.querySelector("#enemy-img")
-         enemyImgBox.textContent =  enemyImgs[Math.round(Math.random() * (enemyImgs.length - 1))]
-        
+        let enemyNames = ["Стул", "Солнце", "Луна"]
+        let enemyNameBox = document.querySelector("#enemy-name")
+
+        let enemyImgs = ["🪑","🌞","🌚"]
+        let enemyImgBox = document.querySelector("#enemy-img")
+        let enemyIndex = Math.round(Math.random() * (enemyImgs.length - 1))
+        enemyImgBox.textContent = enemyImgs[enemyIndex]
+        enemyNameBox.textContent = enemyNames[enemyIndex]
+
 
         let wordList = ["bed", "red", "boy", "moon", "sun", "you", "me"]
         let currentWordIndex = Math.round(Math.random() * (wordList.length - 1))
@@ -88,7 +123,9 @@
         let currentWordBox = document.querySelector("#current-word")
         currentWordBox.textContent = currentWord
 
-        function CheckLetter() {
+        setInterval(EnemyAttackLoop, 1000)
+
+        function EnemyAttackLoop() {
             enemyTime = (Date.now() - enemyTimeStart) / 1000
             console.log("eTime:", enemyTime)
             if (enemyTime > enemyAttackRate) {
@@ -96,6 +133,11 @@
                 enemyTimeStart = Date.now()
 
             }
+            Show()
+        }
+
+        function CheckLetter() {
+
 
             let i = 0
             while (i < textInput.value.length) {
@@ -107,6 +149,10 @@
             if (textInput.value === currentWord) {
                 enemyHP -= 15
                 if (enemyHP < 0) {
+                    enemyIndex = Math.round(Math.random() * (enemyImgs.length - 1))
+                    enemyImgBox.textContent = enemyImgs[enemyImgIndex]
+                    enemyNameBox.textContent = enemyNames[enemyIndex]
+                    
                     enemyHP = enemymaxHP
                     HP = maxHP
                 }
@@ -116,6 +162,10 @@
                 HP -= 5
             }
             console.log(enemyHP)
+            Show()
+        }
+
+        function Show() {
             playerBarHP.style.width = `${(HP/maxHP)*100}%`
             enemyBarHP.style.width = `${(enemyHP/enemymaxHP)*100}%`
         }
