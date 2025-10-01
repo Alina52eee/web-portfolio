@@ -12,6 +12,7 @@
             left: 359px;
             top: 480px;
             font-family: serif;
+            user-select: none;
         }
 
         #play-area {
@@ -21,11 +22,16 @@
             position: relative;
             border-radius: 500px;
         }
-        button{
-            color: #3db28b; 
+
+        button {
+            color: #3db28b;
             background: #0bff00;
             font-family: serif;
             border-radius: 5px;
+        }
+
+        #pet-icon {
+            cursor: pointer;
         }
     </style>
 </head>
@@ -38,14 +44,22 @@
         <input id="size" type="number" placeholder="Размер:">
         <input id="speed" type="number" placeholder="Скорость:">
         <button onclick="AddPet()">Создать.</button>
+        <button onclick="ClearPets()">Очистить.</button>
     </div>
     <div id="play-area">
 
     </div>
 
     <script>
-        let petObjects = []
-       
+        let petObjects = localStorage.getItem("pw-pets") 
+        petObjects = petObjects === null ? [] : JSON.parse(petObjects)
+        
+        function ClearPets(){
+            petObjects = []
+            localStorage.setItem("pw-pets", null)
+            
+        }
+
 
         function AddPet() {
             let nameInp = document.querySelector("#name")
@@ -53,8 +67,8 @@
             let colorInp = document.querySelector("#color")
             let sizeInp = document.querySelector("#size")
             let speedInp = document.querySelector("#speed")
-            
-             let petObj = {}
+
+            let petObj = []
 
             petObj.name = nameInp.value
             petObj.icon = iconInp.value
@@ -62,10 +76,10 @@
             petObj.size = sizeInp.value
             petObj.speed = speedInp.value
             petObj.hunger = 10
-            
+
             petObjects.push(petObj)
-            
-            //console.log(petObjects)
+
+            console.log(petObjects)
 
             /* pet.querySelector("#pet-name").textContent = petObj.name
              pet.querySelector("#pet-icon").textContent = petObj.icon
@@ -73,40 +87,100 @@
              pet.style.color = petObj.color
              pet.querySelector("#pet-icon").style.fontSize = petObj.size + "px"*/
 
+            let posX = "50%"
+            let posY = "50%"
+
             let playArea = document.querySelector("#play-area")
-            playArea.innerHTML += `<div class='pet'>
+            playArea.innerHTML += `<div class='pet'style="left:${posY};                                       right:${posX};">
                                     <div id="pet-name" style="color:${petObj.color}">${petObj.name}</div>
-                                   <div id="pet-icon"style="font-size:${petObj.size}px">${petObj.icon}</div>
+                                   <div id="pet-icon"style="font-size:${petObj.size}px" onclick="PetFeed(event)">${petObj.icon}</div>
                              </div>`
+        }
+        
+        function LoadPet(){
+            
+            let i = 0
+            while(i < petObjects.length){
+                let petObj = petObjects[i]
+                i++
+           
+            let posX = "50%"
+            let posY = "50%"
+
+            let playArea = document.querySelector("#play-area")
+            playArea.innerHTML += `<div class='pet'style="left:${posY};                                       right:${posX};">
+                                    <div id="pet-name" style="color:${petObj.color}">${petObj.name}</div>
+                                   <div id="pet-icon"style="font-size:${petObj.size}px" onclick="PetFeed(event)">${petObj.icon}</div>
+                               </div>`
+            i++
+             }
+            
+        } 
+          
+        LoadPet()
+        
+        function PetFeed(petEvend) {
+            console.log("feed!", petEvend.target)
+
+            let targetPet = petEvend.target.querySelectorAll(".pet")
+
+            let petElements = document.querySelectorAll(".pet")
+
+            let i = 0
+            while (i < petElements.length) {
+                if (targetPet.target === petElements[i]) {
+                    break
+                }
+                i++
+            }
+            
+
+            console.log(
+                targetPet.target === petElements[i],
+                targetPet.target,
+                petElements[i])
+
+            i++
+
+
+            console.log("pet index:", i)
+
+            petObjects[i].hunger += 1
+
         }
 
         setInterval(MainLoop, 150)
-        
-        function MainLoop(){
+
+        function MainLoop() {
+            SavePets()
             PetHunger()
             PetMove()
         }
-        
-        function PetHunger(){
+
+        function SavePets() {
+            localStorage.setItem("pw-pets", JSON.stringify(petObjects))
+        }
+
+        function PetHunger() {
             let petElements = document.querySelectorAll(".pet")
-            
+
             let j = 0
-            while (j < petObjects.length){
+            while (j < petObjects.length) {
                 let hVal = 0.05
                 petObjects[j].hunger -= hVal - (hVal / petObjects[j].size)
-                console.log(petObjects[j].name,petObjects[j].hunger)
-                
+                //console.log(petObjects[j].name, petObjects[j].hunger)
+
                 let petElements = document.querySelectorAll(".pet")
                 let pet = petElements[j]
-                
-                if (petObjects[j].hunger <= 0){
+
+                if (petObjects[j].hunger <= 0) {
                     pet.querySelector("#pet-icon").textContent = "☠"
                 }
-                
-                
+
+
                 j++
             }
-                
+
         }
 
         /*  pet.style.left = "25%"
@@ -121,9 +195,12 @@
             let j = 0
             while (j < petElements.length) {
                 let petObj = petObjects[j]
-                if (petObjects[j].hunger <= 0) continue
+                if (petObjects[j].hunger <= 0) {
+                    j++
+                    continue
+                }
                 let pet = petElements[j]
-                
+
                 pet.querySelector("#pet-name").textContent = petObj.name + `(${Math.ceil(petObj.hunger)})`
 
                 let strPosX = pet.style.left
@@ -148,10 +225,10 @@
                     i++
                 }
                 posY = Number(posY)
-                
+
                 let speed = petObjects[j].speed
-                let randX = (Math.random() * speed) - (speed / 2) 
-                let randY = (Math.random() * speed) - (speed / 2) 
+                let randX = (Math.random() * speed) - (speed / 2)
+                let randY = (Math.random() * speed) - (speed / 2)
 
                 posX += randX
                 posY += randY
@@ -164,11 +241,11 @@
 
                 pet.style.left = posX + "%"
                 pet.style.top = posY + "%"
-                
+
                 j++
-               
+
             }
-               
+
         }
     </script>
 </body></html>
