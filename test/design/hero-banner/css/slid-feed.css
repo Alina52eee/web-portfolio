@@ -1,0 +1,27 @@
+.slider {
+    border: solid 2px #7b1111;
+    overflow: hidden;
+    width: 50%;
+}
+
+.slide-feed {
+    display: flex;
+    background-color: #7b1111;
+    overflow: hidden;
+    width: 200%;
+    animation-name: SlideShow;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+img {
+    width: 12.5%;
+
+}
+
+@keyframes SlideShow {
+    100% {
+        transform: translateX(-50%)
+    }
+}
