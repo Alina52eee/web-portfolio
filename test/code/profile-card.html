@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(245, 43, 43, 0.37);
+            height: 100vh;
+            background-image: url("https://i.pinimg.com/736x/26/b5/ac/26b5ac3150075febe7c7ba6fc3cd4bc2.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card {
+            width: 300px;
+            padding: 16px;
+            border: solid 4px #f03700;
+            border-radius: 16px;
+            overflow: hidden;
+            color: #ff7272;
+            background: rgba(255, 175, 175, 0.73);
+            font-family: serif;
+        }
+
+        #card img {
+            width: 100%;
+            border: solid 4px #ff7272;
+            border-radius: 16px;
+        }
+
+        edit-card input,
+        #edit-card button {
+            display: block;
+            width: 100%;
+        }
+        button{
+            color: #ef004e; 
+            background: #ff8a8a;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="card" class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSeQJ8-tY-Om02WNXeXsftxVsjWzXJRSz7cg&s" alt="Profile Photo">
+        <div id="username">Name</div>
+        <div id="phone-number">8 999 000 87 65</div>
+        <div id="birthday">01.01.1010.</div>
+        <div id="about">pupok love.</div>
+    </div>
+
+    <div id="edit-card" class="card">
+        <input type="text" id="inp-img" placeholder="Фото."><br>
+        <input type="text" id="inp-name" placeholder="Имя."><br>
+        <input type="tel" id="inp-phone" placeholder="Телефон."><br>
+        <input type="date" id="inp-bday" placeholder="Дата рождения."><br>
+        <input type="text" id="inp-about" placeholder="Описание."><br>
+
+        <button onclick="Apply()">Применить.</button>
+    </div>
+    <script>
+        /*  let name = "Malina 19"
+        let photo = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSeQJ8-tY-Om02WNXeXsftxVsjWzXJRSz7cg&s"
+        let phoneNumber = "8 999 000 87 65"
+        let birthday = "01.01.1010."
+        let about = "pupok love."
+        */
+
+        let user = {
+            name: "Malina 19",
+            photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSeQJ8-tY-Om02WNXeXsftxVsjWzXJRSz7cg&s",
+            phoneNumber: "8 999 000 87 65",
+            birthday: "01.01.1010.",
+            about: "pupok love."
+        }
+
+        let nameBox = document.querySelector("#username")
+        let photoBox = document.querySelector("#card img")
+        let phoneBox = document.querySelector("#phone-number")
+        let birthdayBox = document.querySelector("#birthday")
+        let aboutBox = document.querySelector("#about")
+
+        let nameInp = document.querySelector("#inp-name")
+        let photoInp = document.querySelector("#inp-img")
+        let phoneInp = document.querySelector("#inp-phone")
+        let birthdayInp = document.querySelector("#inp-bday")
+        let aboutInp = document.querySelector("#inp-about")
+
+        function Apply() {
+            user.name = nameInp.value
+            user.photo = photoInp.value
+            user.phoneNumber = phoneInp.value
+            user.birthday = birthdayInp.value
+            user.about = aboutInp.value
+            localStorage.setItem("p-user", JSON.stringify(user))
+        }
+
+        localStorage.setItem("p-name", user.name)
+
+        function Load() {
+            user = JSON.parse(localStorage.getItem("p-user"))    
+            
+            nameBox.textContent = user.name
+            photoBox.src = user.photo
+            phoneBox.textContent = user.phone
+            birthdayBox.textContent = user.birthday
+            aboutBox.textContent = user.about
+            
+            nameInp.value = user.name
+            photoInp.value = user.photo
+            phoneInp.value = user.phoneNumber
+            birthdayInp.value = user.birthday
+            aboutInp.value = user.about
+        }
+        
+        Load()
+
+        //localStorage.setItem("p-user", JSON.stringify(user))
+
+        /*
+         nameBox.textContent = name
+         photoBox.src = photo
+         phoneBox.textContent = phone
+         brithdayBox.textContent = brithday
+         aboutBox.textContent = about
+         */
+    </script>
+</body></html>
