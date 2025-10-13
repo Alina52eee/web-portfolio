@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 100vh;
+            margin: 0;
+            perspective: 500px;
+        }
+        div{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            transform-style: preserve-3d;
+        }
+        div:nth-child(1){
+            background: #aa3636;
+            transform: translateZ(50px);
+        }
+        div:nth-child(2){
+            background: #3b1515;
+            transform: rotateY(90deg) translateZ(50px);
+        }
+        div:nth-child(3){
+            background: #813838;
+            transform: rotateY(-90deg) translateZ(50px);
+        }
+        div:nth-child(4){
+            background: #a86060;
+            transform: rotateY(-180deg) translateZ(50px);
+        }
+        div:nth-child(5){
+            background: #b74c4c;
+            transform: rotateX(90deg) translateZ(50px);
+        }
+        div:nth-child(6){
+            background: #d96767;
+            transform: rotateX(-90deg) translateZ(50px);
+        }
+        main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(100px) rotateY(35deg);
+            transform-style: preserve-3d;
+            /background: rgba(255, 0, 0, 0.44);
+            height: 400px;
+            width: 20px;
+            animation: Spin 5s infinite linear;
+        }
+        
+        @keyframes Spin {
+            0%{
+                transform: translateY(100px) rotateY(0deg);
+            }
+            50%{
+                transform: translateY(-100px) rotateY(180deg);
+            }
+            100%{
+                transform: translateY(100px) rotateY(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+  <main>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+</main>
+</body>
+</html>

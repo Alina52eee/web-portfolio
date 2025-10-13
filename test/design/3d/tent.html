@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            background: #a6fff3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 100vh;
+            margin: 0;
+            perspective: 500px;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            transform: rotateY(45deg) translateY(100px);
+            background: rgb(109, 48, 48);
+            height: 400px;
+            width: 20px;
+            transform-style: preserve-3d;
+            animation: Spin 8s linear infinite;
+        }
+
+        #ground {
+            position: absolute;
+            background: #4bff59;
+            width: 1000px;
+            height: 1000px;
+            transform: rotateX(90deg);
+            border-radius: 100%;
+        }
+        
+        @keyframes Spin {
+            0%{
+                transform: translateY(100px) rotateY(0deg);
+            }
+            50%{
+                transform: translateY(100px) rotateY(180deg);
+            }
+            100%{
+                transform: translateY(100px) rotateY(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div id="tent">
+            <div class="wall"></div>
+            <div class="wall"></div>
+            <div class="wall"></div>
+            <div class="wall"></div>
+        </div>
+        <div id="ground"></div>
+    </main>
+</body></html>
