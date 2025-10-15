@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
@@ -30,24 +31,71 @@
 
         #ground {
             position: absolute;
-            background: #4bff59;
+            background: radial-gradient(rgba(255,255,255,0.2),rgba(0,0,0,0.8)),repeating-linear-gradient(45deg, #76ff5d 0 10px,#00ff0a 0 20px);
             width: 1000px;
             height: 1000px;
             transform: rotateX(90deg);
             border-radius: 100%;
         }
-        
+
+        .wall {
+            position: absolute;
+        }
+
+        #tent {
+            transform-style: preserve-3d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+        }
+
+        .wall:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #ffa52a 45%,rgb(149, 103, 0),#ffa52a 55%);
+            transform: rotateZ(45deg) translateZ(100px);
+            border: red 2px solid;
+        }
+
+        .wall:nth-child(2) {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(#ffa52a);
+            transform: rotateZ(45deg) translateZ(-100px);
+            border: red 2px solid;
+        }
+
+        .wall:nth-child(3) {
+            width: 200px;
+            height: 100px;
+            background: #ffa52a;
+            transform:  translateX(70px) rotateY(90deg) rotateX(45deg) translateY(-50px);
+            border: red 2px solid;
+        }
+
+        .wall:nth-child(4) {
+             width: 200px;
+            height: 100px;
+            background: #ffa52a;
+            transform:  translateX(-70px) rotateY(-90deg) rotateX(45deg) translateY(-50px);
+            border: red 2px solid;
+        }
+
         @keyframes Spin {
-            0%{
+            0% {
                 transform: translateY(100px) rotateY(0deg);
             }
-            50%{
+
+            50% {
                 transform: translateY(100px) rotateY(180deg);
             }
-            100%{
+
+            100% {
                 transform: translateY(100px) rotateY(360deg);
             }
         }
+
     </style>
 </head>
 
@@ -61,4 +109,3 @@
         </div>
         <div id="ground"></div>
     </main>
-</body></html>
