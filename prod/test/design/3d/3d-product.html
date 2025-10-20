@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            height: 500px;
+        }
+
+        #left {
+            background-color: darkred;
+            flex: 1;
+            perspective: 500px;
+        }
+
+        #right {
+            background-color: #8b0000;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /transform-style: preserve-3d;
+            perspective: 500px;
+        }
+
+        img {
+            width: 490px;
+            height: 400px;
+            border-radius: 20px;
+            border: solid 4px;
+            border-color: #5c1b1b;
+            border-style: ridge;
+            transform: rotateY(-15deg) rotateX(10deg);
+            animation-name: ImgIdle;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+        }
+        @keyframes ImgIdle{
+            0%{
+                transform: rotateY(-5deg) rotateX(10deg);
+            }
+            50%{
+                transform: rotateY(5deg) rotateX(10deg);
+            }
+            100%{
+                transform: rotateY(-5deg) rotateX(10deg);
+            }
+        }
+        #title{
+            font-size: 25px;    
+            font-family: serif;
+            font-weight: 600;
+            transform: rotateY(25deg) translate(16deg);
+            padding: 50px;
+        }
+        #subtitle{
+            transform: rotateY(-20deg);
+            padding: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="left">
+        <div id="title">Всегда рядом.</div>
+        <div id="subtitle">smartwatch, с высокой точностью и модными ремешками, которые светиться в темноте,чтобы ты всегда был ослепителен.</div>
+    </div>
+    <div id="right">
+        <img src="/wpm/test/design/img/tik.jpg" alt="">
+    </div>
+</body></html>

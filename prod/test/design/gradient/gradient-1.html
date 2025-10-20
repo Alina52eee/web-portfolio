@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            border: black 1px solid;
+            border-radius:15px;
+        }
+        .box:nth-child(2){
+            background: 50% 50% /100% url("/test/design/img/random/7.jpg")
+        }
+        .box:nth-child(3){
+            background: 50% 50% /100% url("/test/design/img/random/9.jpg")
+        }
+        .box:nth-child(4){
+            background: center /50% no-repeat url("/test/design/img/random/7.jpg")
+        }
+        .box:nth-child(5){
+            border: black 8px dotted;
+            background: center / cover no-repeat url("/test/design/img/random/9.jpg") 
+        }
+        .box:nth-child(6){
+            font-size: 100px;
+            color: transparent;
+            background: center / cover no-repeat url("/test/design/img/random/7.jpg") border-box text; 
+        }
+        .box:nth-child(8){
+            font-size: 100px;
+            color: transparent;
+            background: linear-gradient(45deg, #600d0d,#ffb6f9); 
+        }
+        .box:nth-child(9){
+            font-size: 100px;
+            color: transparent;
+            background: 0 0 / 100% radial-gradient(#600d0d,#ffb6f9, red); 
+        }
+        .box:nth-child(10){
+            font-size: 100px;
+            color: transparent;
+            background: 0 0 / 100% conic-gradient(from 45deg, #600d0d,#ffb6f9, red); 
+        }
+        .box:nth-child(12){
+            font-size: 100px;
+            color: transparent;
+            background: repeating-linear-gradient(45deg, #76ff5d 0 10px,#00ff0a 0 20px);  
+        }
+        .box:nth-child(13){
+            font-size: 100px;
+            color: transparent;
+            background: linear-gradient(90deg, #76ff5d 45%,#00ff0a,#76ff5d 55%);    
+        }
+    
+    </style>
+</head>
+<body>
+    <h2>Фон "background":</h2>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box">A</div>
+    <h2>Градиенты: linear-,radial-,conic-gradient":</h2>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <h2>Текстуры:</h2>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    
+</body>
+</html>

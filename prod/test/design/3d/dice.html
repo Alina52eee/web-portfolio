@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 100vh;
+            margin: 0;
+            perspective: 500px;
+        }
+        div{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            transform-style: preserve-3d;
+            font-size: 64px;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        div:nth-child(1){
+            background: #aa3636;
+            transform: translateZ(50px);
+        }
+        div:nth-child(2){
+            background: #3b1515;
+            transform: rotateY(90deg) translateZ(50px);
+        }
+        div:nth-child(3){
+            background: #813838;
+            transform: rotateY(-90deg) translateZ(50px);
+        }
+        div:nth-child(4){
+            background: #a86060;
+            transform: rotateY(-180deg) translateZ(50px);
+        }
+        div:nth-child(5){
+            background: #b74c4c;
+            transform: rotateX(90deg) translateZ(50px);
+        }
+        div:nth-child(6){
+            background: #d96767;
+            transform: rotateX(-90deg) translateZ(50px);
+        }
+        main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(0px) rotateY(0deg);
+            transform-style: preserve-3d;
+            background: rgba(255, 0, 0, 0.44);
+           / height: 400px;
+            width: 20px;
+            transition:  1s cubic-bezier(.32, -0.47, .76, 1.47);
+        }
+        }
+    </style>
+</head>
+<body onclick="Roll()">
+  <main>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+</main>
+<script>
+   var cube = document.querySelector("main")
+   
+   function Roll(){
+       let x = Math.floor(Math.random() * 4) * 90
+       let y = Math.floor(Math.random() * 4) * 90
+       let z = Math.floor(Math.random() * 4) * 90
+        
+       cube.style.transform = `rotateX(${x}deg) rotateY(${y}deg) rotateZ(${z}deg)`
+   }
+</script>
+</body>
+</html>
