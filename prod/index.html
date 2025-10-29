@@ -7,30 +7,33 @@
     <link rel="stylesheet" href="assets/css/themes.css">
     <title>Document</title>
     <style>
-        html{
+        html {
             font-size: 16px;
         }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: serif;
         }
-        
-        body{
+
+        body {
             background: var (--color-bg);
             color: #550000;
         }
+
         .main-header {
             background: #5f0010;
             display: flex;
             padding: 1;
+            animation: HeaderAnim 1s;
         }
 
         .main-header-icon {
             background: #a81616;
-            width: 50px;
-            height: 50px;
+            width: clamp(1rem, 5vw, 3rem);
+            height: clamp(1rem, 5vw, 3rem);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -45,7 +48,7 @@
         }
 
         .main-nav {
-            background: #890000;
+            background: var(--color-surface);
             flex-grow: 1;
             display: flex;
             gap: 16px;
@@ -71,11 +74,60 @@
         .main-header-h1 {
             background: #950000;
             text-align: center;
-            font-size: 2.5rem;
+            font-size: clamp(1rem, 5vw, 3rem);
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 1%;
+        }
+
+        .main-nav-dropdown {
+            display: none;
+        }
+
+        .main-nav-dropdown:hover + .main-nav {
+            display: block;
+            position: absolute;
+        }
+        
+        .main-nav-box{
+                position: relative;
+                flex: 1;
+                display: flex;
+                justify-content: center;
+            }
+        
+        @keyframes HeaderAnim{
+            0%{
+                opacity: 0;
+            }
+            100%{
+                opacity: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            
+            .main-nav {
+                display: none;
+                top: 100%;
+            }
+
+            .main-nav-dropdown {
+                display: block;
+                font-size: 3rem;
+                color: var(--color-text);
+                flex: 1;
+                text-align: center;
+            }
+
+            .main-nav-dropdown:active + .main-nav {
+                display: block;
+            }
+            
+            .main-nav-dropdown:focus-within .main-nav {
+                display: block;
+            }
         }
     </style>
 </head>
@@ -85,11 +137,22 @@
         <div class="main-header-icon">
             <img src="assets/imgs/kiti1.jpg" alt="">
         </div>
+        
+      <nav class="main-nav-box">
+        <a href="#" class="main-nav-dropdown">=</a>
         <nav class="main-nav">
             <a href="#">Главная</a>
             <a href="#">Дизаин</a>
             <a href="#">Код</a>
-        </nav>
+        </nav>    
+      </nav>
+       
         <h1 class="main-header-h1">Web Site</h1>
+        <main>
+            <section class="hero">
+                <div class="hero-bg"></div>
+                <div class="hero-fg"></div>
+            </section>
+        </main>
     </header>
 </body></html>
