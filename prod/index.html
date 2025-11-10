@@ -7,17 +7,25 @@
     <link rel="stylesheet" href="assets/css/themes.css">
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/slide-show-fade.css">
     <title>Portfolio</title>
     <style>
         .hero {
             height: 400px;
-            background: red;
+            position: relative;
         }
-
-        .hero-fg {
-            background: pink;
+        .hero-bg{
+            width: 100%;
             height: 100%;
+            overflow: hidden;
+            background: 10% 10% / 10% 10% repeating-linear-gradient(90deg,red,green,red);
+            position: absolute;
+            z-index: -1;
+        } 
+        .hero-fg {
+            height: 200%;
             display: flex;
+            width: 100%;
         }
 
         .hero-right {
@@ -27,7 +35,6 @@
         }
 
         .hero-fg-text {
-            background: green;
             width: 100%;
             height: 100%;
             color: #95eacd;
@@ -45,7 +52,6 @@
             font-size: 2rem;
         }
         .hero-fg-btns {
-            background: #00ffff;
             width: 100%;
             height: 100%;
             display: flex;
@@ -70,7 +76,6 @@
             font-size: 1.25rem; 
         }
         .hero-fg-imgs {
-            background: #ce00ff;
             width: 50%;
             height: 100%;
             display: flex;
@@ -81,8 +86,8 @@
         }
         .hero-fg-img-1{
             position: absolute;
-            margin-top: 120px;
-            margin-right: 150px;
+            margin-top: 50px;
+            margin-right: 215px;
             z-index: 2;
             width: 30%;
             height: 70%;
@@ -99,6 +104,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            
         }
         .hero-fg-box{
             position: absolute;
@@ -106,7 +112,7 @@
             margin-left: 20px;
             margin-right: 40px;
             width: 30%;
-            height: 60%;
+            height: 55%;
             background: #d1c0ff;
             display: flex;
             justify-content: center;
@@ -115,8 +121,10 @@
         .test{
             height: 300px;
             margin-bottom: 5px;
-            background: #f57bf0;
+            
         }
+
+        
     </style>
 </head>
 
@@ -140,16 +148,23 @@
     </header>
     <main>
         <section class="hero">
-            <div class="hero-bg"></div>
+            <div class="hero-bg">
+                  <div class="slide-show-fade">
+                          <img src="assets/imgs/7.jpg" alt="">
+                          <img src="assets/imgs/8.jpg" alt="">
+                          <img src="assets/imgs/9.jpg" alt="">
+                      </div>
+            </div>
             <div class="hero-fg">
                 
                 <div class="hero-fg-imgs">
                     <div class="hero-fg-img-1">
+                    
                        1
                         <!--Слайд шоу-->
                     </div>
                     <div class="hero-fg-img-2">
-                        2<!--Слайд шоу-->
+                        
                     </div>
                     <div class="hero-fg-box">
                         <!--Слайд шоу-->
